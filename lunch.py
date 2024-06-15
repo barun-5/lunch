@@ -7,18 +7,18 @@ def calculate_work_hours(start_time, end_time):
     start = convert_to_24h(start_time)
     end = convert_to_24h(end_time)
     if end < start:
-        end += timedelta(days=1)  # Handle cases where the end time is past midnight
-    return (end - start).total_seconds() / 3600  # Convert seconds to hours
+        end += timedelta(days=1)  
+    return (end - start).total_seconds() / 3600  
 
 def calculate_lunch_break(work_hours):
     if work_hours < 4:
         return (0, 0)
     elif 4 <= work_hours <= 5:
-        return (10, 0)  # 10 minutes paid break
+        return (10, 0) 
     elif 5 < work_hours <= 7.6:
-        return (10, 30)  # 10 minutes paid and 30 minutes unpaid break
+        return (10, 30)  
     elif work_hours > 7.6:
-        return (2 * 10, 30)  # 2x 10 minutes paid and 30 minutes unpaid break
+        return (2 * 10, 30)  
 
 def adjust_work_hours(work_hours, paid_break, unpaid_break):
     total_break_minutes = paid_break + unpaid_break
@@ -34,7 +34,7 @@ def lunch_break_app():
     
     adjusted_work_hours = adjust_work_hours(work_hours, paid_break, unpaid_break)
     
-    # Recalculate breaks based on adjusted work hours
+   
     final_paid_break, final_unpaid_break = calculate_lunch_break(adjusted_work_hours)
     
     print(f"Total work hours before break: {work_hours:.2f}")
